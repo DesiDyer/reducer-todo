@@ -3,7 +3,6 @@ import { initialState, reducer } from "../reducers/reducer";
 
 function TodoForm(props) {
   const [item, setItem] = useState();
-  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleChanges = (e) => {
     setItem(e.target.value);
@@ -11,7 +10,8 @@ function TodoForm(props) {
 
   const submitItem = (e) => {
     e.preventDefault();
-    dispatch({ type: "ADD_ITEM", payload: item });
+
+    props.addItem(item);
     setItem("");
   };
 

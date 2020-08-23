@@ -10,15 +10,13 @@ export const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
       const newItem = { name: action.payload, id: Date.now(), done: false };
-      return { ...state, newItem };
+      return [...state, newItem];
 
     case "TOGGLE_ITEM":
-      state.map((item) => {
+      return state.map((item) => {
+        console.log(item.done);
         if (action.payload === item.id) {
-          return {
-            ...item,
-            done: !item.done,
-          };
+          return { ...item, done: !item.done };
         }
         return item;
       });

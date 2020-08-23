@@ -10,12 +10,14 @@ import { initialState, reducer } from "./reducers/reducer";
 
 function App() {
   // const [todoItems, setTodoItems] = useState(initialTodoItems);
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const toggleItem = (itemId) => {
     console.log(itemId);
 
     dispatch({ type: "TOGGLE_ITEM", payload: itemId });
+
     // setTodoItems(
     //   state.map((item) => {
     //     if (itemId === item.id) {
@@ -29,17 +31,19 @@ function App() {
     // );
   };
 
-  // const addItem = (item) => {
-  //   const newItem = {
-  //     name: item,
-  //     id: Date.now(),
-  //     done: false,
-  //   };
-  //   setTodoItems([...todoItems, newItem]);
-  // };
+  const addItem = (item) => {
+    dispatch({ type: "ADD_ITEM", payload: item });
+    //   const newItem = {
+    //     name: item,
+    //     id: Date.now(),
+    //     done: false,
+    //   };
+    //   setTodoItems([...todoItems, newItem]);
+  };
 
   const cleardone = (e) => {
     e.preventDefault();
+
     // setTodoItems(state.filter((item) => !item.done));
     dispatch({ type: "CLEAR_DONE" });
   };
@@ -47,7 +51,7 @@ function App() {
   return (
     <div className="App">
       <div>
-        <TodoForm />
+        <TodoForm addItem={addItem} />
       </div>
 
       <div id="paper">
